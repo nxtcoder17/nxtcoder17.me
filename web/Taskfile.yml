@@ -1,0 +1,20 @@
+version: 3
+tasks:
+  blog:dev:
+    interactive: true
+    cmds:
+      - |+
+        pushd apps/blog
+        PORT=17001 pnpm run dev
+        popd
+  blog:build:
+    interactive: false
+    env:
+      BLOGS_DIR:
+        sh: "echo $PWD/blogs"
+    cmds:
+      - echo $BLOGS_DIR
+      - |+
+        pushd apps/blog
+        npm run indexing
+        popd

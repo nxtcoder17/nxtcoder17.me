@@ -1,0 +1,31 @@
+extends:
+  - airbnb
+  - airbnb/hooks
+
+plugins:
+  - prettier
+
+env:
+  browser: true
+
+rules:
+  import/order: 0
+#  react/prop-types: 0
+  react/require-default-props: 0
+  react/jsx-props-no-spreading: 0
+  react/function-component-definition: 0
+  react/display-name: 0
+  react/react-in-jsx-scope: 0
+  jsx-a11y/anchor-is-valid: 0
+  jsx-a11y/click-events-have-key-events: 0
+  jsx-a11y/no-static-element-interactions: 0
+  no-param-reassign:
+    - error
+    - props: false
+  import/no-unresolved:
+    - error
+    - ignore:
+        - \.svg
+  import/prefer-default-export: 0
+  react/jsx-first-prop-new-line: 0
+  react/no-array-index-key: 0
