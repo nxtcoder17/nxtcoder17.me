@@ -18,3 +18,9 @@ tasks:
         pushd apps/blog
         npm run indexing
         popd
+
+  til:dev:
+    dir: ./apps/til
+    interactive: true
+    cmds:
+      - npm run dev

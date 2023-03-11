@@ -1,31 +1,37 @@
 const path = require('path');
-const projectTwConfig = require('../../tailwind.config');
 
 const purgePath = [
   path.resolve(__dirname, './pages/**/*.jsx'),
+  path.resolve(__dirname, './components/**.jsx'),
   path.resolve(__dirname, '../../pkg/**/*.jsx'),
 ];
 
-const blogTheme = {
-  fontFamily: {
-    sans: ['Recursive'],
-    logo: ['Nova Mono'],
-  },
-  extend: {
-    colors: {
-      darkPage: '#111a1f',
-      darkHeader: '#1a2833',
-      blogPost: '#2b3740',
-      textPrimary: '#9dafbd',
-      code: {
-        inline: '#263a4a',
+const mdxScaleFactor = 1.2;
+
+module.exports = {
+  theme: {
+    extend: {
+      fontFamily: {
+        // sans: ['"Recursive"'],
+        sans: ['"Comic Neue"'],
+        // sans: ['"Cantamaran"'],
+        // sans: ['"Comic Code Ligatures"'],
+        // code: ['"Comic Code Ligatures"', '"Fira Code"'],
+        code: ['"Comic Neue"'],
+      },
+      fontSize: {
+        mdxSm: `${0.9 * mdxScaleFactor}rem`,
+        mdxBase: `${1 * mdxScaleFactor}rem`,
+        mdxLg: `${1.125 * mdxScaleFactor}rem`,
+        mdxXl: `${1.25 * mdxScaleFactor}rem`,
+        mdx2xl: `${1.563 * mdxScaleFactor}rem`,
+        mdx3xl: `${1.953 * mdxScaleFactor}rem`,
+        mdx4xl: `${2.441 * mdxScaleFactor}rem`,
+        mdx5xl: `${3.052 * mdxScaleFactor}rem`,
       },
     },
   },
-};
-
-module.exports = {
-  theme: blogTheme,
-  presets: [projectTwConfig],
+  // presets: [projectTwConfig],
   content: purgePath,
+  darkMode: 'class',
 };

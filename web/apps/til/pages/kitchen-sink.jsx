@@ -1,7 +1,11 @@
 import { Calendar } from 'pkg/calendar/calendar';
-import { TagCloud } from 'react-tagcloud';
 import PropTypes from 'prop-types';
-import randomColor from 'randomcolor';
+import { serialize } from 'next-mdx-remote/serialize';
+import { MDXComponents } from 'pkg/mdx/components';
+import { MDXRemote } from 'next-mdx-remote';
+import fs from 'fs/promises';
+import path from 'path';
+import remarkGfm from 'remark-gfm';
 
 const tagColors = [
   '#3d6673',
@@ -35,12 +39,37 @@ TagsBar.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string),
 };
 
-const Page = () => (
+// eslint-disable-next-line react/prop-types
+const Page = ({ mdxSource }) => (
   <div className="flex flex-col">
     <div>This is kitchen sink</div>
     <Calendar.Month date={new Date()} />
     <TagsBar tags={['kubernetes', 'javascript', 'shell', 'i3wm', 'golang']} />
+    <MDXRemote {...mdxSource} components={MDXComponents} />
   </div>
 );
+
+// export async function getStaticPaths() {
+//   const lsDir = await fs.readdir(path.resolve(process.cwd(), '.examples'));
+//   return {
+//     paths: lsDir.map((p) => ({ params: { p: p.toString() } })),
+//     fallback: false,
+//   };
+// }
+
+export async function getStaticProps() {
+  const doc = await fs.readFile(path.join(process.cwd(), '.examples/2023/January/15/sample-doc.md'));
+  return {
+    props: {
+      mdxSource: await serialize(doc.toString(), {
+        mdxOptions: {
+          remarkPlugins: [
+            remarkGfm,
+          ],
+        },
+      }),
+    },
+  };
+}
 
 export default Page;

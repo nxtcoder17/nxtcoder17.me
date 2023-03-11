@@ -1,32 +1,29 @@
-const Ul = (props) => {
-  return <ul className="list-disc list-inside px-4" {...props} />;
-};
+import { CodeBlock } from './code-renderer';
 
-const Ol = (props) => {
-  return <ol className="list-decimal list-inside px-4" {...props} />;
-};
+const Ul = (props) => <ul className="list-disc list-inside px-4 text-mdxBase" {...props} />;
 
-const Li = (props) => {
-  return <li {...props} />;
-};
+const Ol = (props) => <ol className="list-decimal list-inside px-4 text-mdxBase" {...props} />;
 
-const A = (props) => {
-  return <a className="text-indigo-400 font-medium" {...props} />;
-};
+// eslint-disable-next-line react/prop-types
+const Li = ({ children, ...props }) => <li className="px-4 text-mdxBase" {...props}>{children}</li>;
+
+// eslint-disable-next-line react/prop-types
+const A = ({ children, ...props }) => <a className="text-indigo-400 font-medium text-mdxBase" {...props}>{children}</a>;
 
 export const MDXComponents = {
-  p: (props) => <div className="dark:text-coolGray-300 " {...props} />,
-  h1: Title1,
-  h2: Title2,
-  h3: SubTitle,
+  p: (props) => <div className="dark:text-coolGray-300 text-mdxBase" {...props} />,
+  h1: (props) => <h1 className="text-mdx3xl font-bold tracking-wide" {...props}>{props.children}</h1>,
+  h2: (props) => <h2 className="text-mdx2xl font-bold tracking-wide decoration-wavy" {...props}>{props.children}</h2>,
+  h3: ({ children, ...props }) => <h3 className="text-mdxLg font-bold tracking-wide underline decoration-wavy pb-2 pt-1 capitalize" {...props}>{children}</h3>,
   img: (props) => (
     <div className="w-full flex flex-row justify-center bg-gray-200 object-cover">
       <img {...props} alt="This is an img" className="w-full" />
     </div>
   ),
   a: A,
-  pre: (props) => <pre {...props} />,
-  code: (props) => <CodeBlock className="font-code" {...props} />,
+  details: (props) => <div className="text-mdx2xl bg-red-200" {...props} />,
+  pre: (props) => <div className="font-code" {...props} />,
+  code: (props) => <CodeBlock {...props} />,
   ul: Ul,
   ol: Ol,
   li: Li,

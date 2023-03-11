@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['pkg'],
-  experimental: {
+  experimental: {},
+  eslint: {
+    ignoreDuringBuilds: true,
   },
 };
 

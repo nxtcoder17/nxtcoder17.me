@@ -2,6 +2,9 @@ extends:
   - airbnb
   - airbnb/hooks
 
+parserOptions:
+  ecmaVersion: 2020
+
 plugins:
   - prettier
 
@@ -10,6 +13,15 @@ env:
 
 rules:
   import/order: 0
+  max-len:
+    - error
+    - tabWidth: 2
+      code: 120
+      ignoreUrls: true
+      ignoreStrings: true
+      ignoreTemplateLiterals: true
+  react/forbid-prop-types: 0
+
 #  react/prop-types: 0
   react/require-default-props: 0
   react/jsx-props-no-spreading: 0

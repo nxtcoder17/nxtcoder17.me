@@ -38,7 +38,6 @@ export default async function Page() {
   return (
     <div>
       {JSON.stringify(blogsList)}
-
       {JSON.stringify(blogsMap)}
     </div>
   );
