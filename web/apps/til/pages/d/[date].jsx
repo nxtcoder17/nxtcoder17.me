@@ -2,21 +2,24 @@ import fs from 'fs/promises';
 import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
 import { blogsConfig } from '../../config.d/blog.config';
-import { MDXRemote } from 'next-mdx-remote';
-import { MDXComponents } from 'pkg/mdx/components';
 import PropTypes from 'prop-types';
 import { PageWrapper } from '../../components/page';
 import matter from 'gray-matter';
+import { MdDocumentRenderer } from '../../components/md-doc-renderer';
 
-const Page = ({ blogPosts }) => (
+const Page = ({ date, blogPosts }) => (
   <PageWrapper>
+    <div className="px-3 md:px-0 py-2 text-xl w-max">
+      <div className="bg-blue-200 py-1 px-2">{date}</div>
+    </div>
     {blogPosts.map((bp, idx) => (
-      <MDXRemote key={bp.pageRef + idx} {...bp.mdxSource} components={MDXComponents} />
+      <MdDocumentRenderer key={bp.pageRef + idx} {...bp.mdxSource} />
     ))}
   </PageWrapper>
 );
 
 Page.propTypes = {
+  date: PropTypes.string,
   blogPosts: PropTypes.arrayOf(PropTypes.any),
 };
 
@@ -42,6 +45,7 @@ export async function getStaticProps(ctx) {
 
   return {
     props: {
+      date,
       blogPosts: await Promise.all(docs.map(async (item) => {
         const { content } = matter(item);
         return ({

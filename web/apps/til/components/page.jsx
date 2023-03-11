@@ -17,7 +17,7 @@ export const PageWrapper = (props) => {
   return (
     <ThemeContext.Provider value={themeProps}>
       <div className="hero-pattern-hideout h-screen overflow-y-auto">
-        <NavHeader />
+        <NavHeader href="/" />
         <div className="container mx-auto" {...props} />
       </div>
     </ThemeContext.Provider>

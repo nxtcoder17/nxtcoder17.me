@@ -1,18 +1,15 @@
 import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from 'remark-gfm';
-import { MDXRemote } from 'next-mdx-remote';
-import { MDXComponents } from 'pkg/mdx/components';
 import { blogsConfig } from '../../config.d/blog.config';
 import * as fs from 'pkg/fs/functions';
 import matter from 'gray-matter';
 import PropTypes from 'prop-types';
 import { PageWrapper } from '../../components/page';
+import { MdDocumentRenderer } from '../../components/md-doc-renderer';
 
 const Page = ({ mdxSource }) => (
   <PageWrapper>
-    <div className="flex flex-col gap-2.5 px-4 py-2 overflow-x-hidden">
-      <MDXRemote {...mdxSource} components={MDXComponents} />
-    </div>
+    <MdDocumentRenderer {...mdxSource} />
   </PageWrapper>
 );
 

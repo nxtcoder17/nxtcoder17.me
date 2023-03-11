@@ -19,7 +19,7 @@ const ThemeWrapper = ({ language, code, ...props }) => {
   );
 };
 
-const highlightClassName = 'bg-sky-100 border-l-4 border-sky-800';
+const highlightClassName = 'bg-sky-100 border-l-4 border-sky-800 w-max';
 
 let hlStart = false;
 const highlightLine = (lineArray, lineProps) => {
