@@ -1,4 +1,6 @@
-### blog inspirations
+# this is complete source code for my website, that eventually would be hosted at `nxtcoder17.me`, and different subdomains
+
+##### content and design inspirations to be taken from
 - [Tania Rascia](https://www.taniarascia.com/blog)
 - [Julia Evans](https://jvns.ca/)
 - [Josh W Comeau](https://www.joshwcomeau.com/blog/how-i-built-my-blog/)
