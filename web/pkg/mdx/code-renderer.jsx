@@ -1,16 +1,22 @@
-import Highlight, { Prism } from 'prism-react-renderer';
-import oceanicNext from 'prism-react-renderer/themes/oceanicNext';
+import { Prism } from 'prism-react-renderer';
+import dynamic from 'next/dynamic';
+// import oceanicNext from 'prism-react-renderer/themes/oceanicNext';
 import githubTheme from 'prism-react-renderer/themes/vsLight';
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
 import { ThemeContext } from '../contexts/theme-context';
+
+const Highlight = dynamic(() => import('prism-react-renderer'), {
+  ssr: false,
+});
+// const Prism = dynamic(() => import('prism-react-renderer').then((p) => p.Prism), { ssr: false });
 
 // eslint-disable-next-line react/prop-types
 const ThemeWrapper = ({ language, code, ...props }) => {
   const { theme } = useContext(ThemeContext);
   return (
     <Highlight
-      theme={theme === 'light' ? githubTheme : oceanicNext}
+      theme={theme === 'light' ? githubTheme : githubTheme}
       Prism={Prism}
       code={code}
       language={language}
@@ -19,7 +25,7 @@ const ThemeWrapper = ({ language, code, ...props }) => {
   );
 };
 
-const highlightClassName = 'bg-sky-100 border-l-4 border-sky-800 w-max';
+const highlightClassName = 'bg-sky-100 border-l-4 border-sky-200 w-max';
 
 let hlStart = false;
 const highlightLine = (lineArray, lineProps) => {

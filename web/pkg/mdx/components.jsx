@@ -24,6 +24,7 @@ export const MDXComponents = {
   details: (props) => <div className="text-mdx2xl bg-red-200" {...props} />,
   pre: (props) => <div className="font-code" {...props} />,
   code: (props) => <CodeBlock {...props} />,
+  blockquote: (props) => <div className="bg-blue-100 px-4 py-2" {...props} />,
   ul: Ul,
   ol: Ol,
   li: Li,

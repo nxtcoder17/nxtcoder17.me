@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "predev": "node -r esm ./config.d/indexing.js",
-    "dev": "next dev"
+    "dev": "next dev",
+    "prebuild": "node -r esm ./config.d/indexing.js",
+    "build": "next build",
+    "export": "next export -o /tmp/export"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.2",

@@ -24,3 +24,22 @@ tasks:
     interactive: true
     cmds:
       - npm run dev
+
+  til:build:
+    dir: ./apps/til
+    vars:
+      Image: docker.io/nxtcoder17/til.nxtcoder17.me
+      Tag: v1.0.0
+    cmds:
+      - docker buildx build -t {{.Image}}:{{.Tag}} --build-context project=../.. .
+      - docker push {{.Image}}:{{.Tag}} 
+
+  til:deploy:
+    vars:
+      TilImage: docker.io/nxtcoder17/til.nxtcoder17.me:v1.0.0
+    cmds:
+      - nxt template parse --missing-key=error -f deploy/til-deployment.yml.tpl
+        --set Name=til-web
+        --set Namespace=nxtcoder17
+        --set Image={{.TilImage}}
+        --set ImagePullPolicy=Always
