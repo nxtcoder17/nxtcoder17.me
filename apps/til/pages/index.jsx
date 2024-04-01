@@ -7,12 +7,12 @@ import { PageWrapper } from '../components/page';
 const TitleList = ({ items }) => (
   <div>
     {items.map((item, idx) => (
-      <div className="flex flex-row gap-4">
+      <div key={idx} className="flex flex-row gap-4">
         <div className="flex flex-col items-center h-min">
           <div className="bg-blue-900 rounded-full my-1 h-2 w-2 ring-4 ring-blue-200" />
           {idx + 1 !== items.length && <div className="bg-slate-400 h-8 w-0.5" />}
         </div>
-        <Link key={item.href + idx} href={item.href} className="text-slate-800 h-min">
+        <Link key={item.href + idx} href={item.href} className="text-slate-800 dark:text-slate-200 h-min">
           <div className="leading-none text-lg">{item.title}</div>
         </Link>
       </div>
@@ -27,9 +27,9 @@ TitleList.propTypes = {
 const Page = ({ dates, docMap }) => (
   <PageWrapper>
     {dates.map((date, idx) => (
-      <div key={idx} className="flex flex-col gap-4 px-2 py-4 md:flex-row md:px-0 md:gap-8">
+      <div key={idx} className="flex flex-col gap-2 px-2 py-4 md:flex-row md:px-0 md:gap-4 md:items-center">
         <Link
-          className="bg-blue-200 px-4 py-2 w-max h-min tracking-wide"
+          className="bg-blue-200 rounded-sm flex-initial w-40 px-4 py-2 h-min tracking-wide"
           href={`/d/${Buffer.from(date, 'utf-8').toString('base64')}`}
         >
           {date}

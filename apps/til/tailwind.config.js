@@ -1,3 +1,5 @@
+// import { THEME_LIGHT } from 'pkg/theme/styles';
+
 const path = require('path');
 
 const purgePath = [
@@ -28,6 +30,12 @@ module.exports = {
         mdx3xl: `${1.953 * mdxScaleFactor}rem`,
         mdx4xl: `${2.441 * mdxScaleFactor}rem`,
         mdx5xl: `${3.052 * mdxScaleFactor}rem`,
+      },
+      colors: {
+        // Using modern `rgb`
+        // 'content-fg': 'rgb(var(--color-content-fg) / <alpha-value>)',
+        'header-text': 'var(--color-header-text)',
+        'header-bg': 'var(--color-header-bg)',
       },
     },
   },

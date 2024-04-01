@@ -21,7 +21,6 @@ Let's solve these issues one by one
 ### not able to curl/ping from outside to services running in that VM
 OCI VMs have some weird networking setup, they not only messed up with their VPC, ingress, egress things on their dashboard, on most of the VMs they also played around `iptables`, which causes this issue
 
-{/* <iframe id="reddit-embed" src="https://www.redditmedia.com/r/oraclecloud/comments/r8lkf7/a_quick_tips_to_people_who_are_having_issue/?ref_source=embed&amp;ref=share&amp;embed=true" sandbox="allow-scripts allow-same-origin allow-popups" style={{border: "none"}} scrolling="no" width="640" height="387"></iframe> */ }
 <iframe id="reddit-embed" src="https://www.redditmedia.com/r/oraclecloud/comments/r8lkf7/a_quick_tips_to_people_who_are_having_issue/?ref_source=embed&amp;ref=share&amp;embed=true" sandbox="allow-scripts allow-same-origin allow-popups" style={{border: "none"}} scrolling="yes" width="640" height="387"></iframe>
 
 thanks, to him and his suggestions, executing these does seem to work, and make VM ready to accept outside connections

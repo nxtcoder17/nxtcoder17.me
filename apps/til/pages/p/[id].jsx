@@ -1,5 +1,5 @@
 import { serialize } from 'next-mdx-remote/serialize';
-import remarkGfm from 'remark-gfm';
+// import remarkGfm from 'remark-gfm';
 import { blogsConfig } from '../../config.d/blog.config';
 import * as fs from 'pkg/fs/functions';
 import matter from 'gray-matter';
@@ -33,11 +33,7 @@ export async function getStaticProps(ctx) {
   return {
     props: {
       mdxSource: await serialize(content, {
-        mdxOptions: {
-          remarkPlugins: [
-            remarkGfm,
-          ],
-        },
+        // mdxOptions: { remarkPlugins: [remarkGfm] },
       }),
     },
   };

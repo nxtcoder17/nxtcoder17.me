@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import githubTheme from 'prism-react-renderer/themes/vsLight';
 import PropTypes from 'prop-types';
 import { useContext } from 'react';
-import { ThemeContext } from '../contexts/theme-context';
+import { ThemeContext } from '../theme/context';
 
 const Highlight = dynamic(() => import('prism-react-renderer'), {
   ssr: false,
@@ -16,7 +16,7 @@ const ThemeWrapper = ({ language, code, ...props }) => {
   const { theme } = useContext(ThemeContext);
   return (
     <Highlight
-      theme={theme === 'light' ? githubTheme : githubTheme}
+      theme={theme !== 'light' ? githubTheme : githubTheme}
       Prism={Prism}
       code={code}
       language={language}
@@ -31,8 +31,6 @@ let hlStart = false;
 const highlightLine = (lineArray, lineProps) => {
   const lines = [];
   const lprops = { ...lineProps };
-
-  // console.log('lineArray:', lineArray);
 
   for (let i = 0; i < lineArray.length; i += 1) {
     const { content } = lineArray[i];
