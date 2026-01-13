@@ -36,8 +36,6 @@ export default function TechTil() {
             <div class="flex items-center gap-3 mb-4">
               <span class="tag tag-tech">Tech</span>
               <span class="text-[13px] text-muted">{formatDisplayDate(t().date)}</span>
-              <span class="text-muted">·</span>
-              <span class="text-[13px] text-muted">{t().readingTime}</span>
             </div>
             <h1 class="text-2xl font-bold tracking-tight leading-snug">
               {t().title}

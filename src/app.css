@@ -1,7 +1,7 @@
-@import "tailwindcss";
+/* NxtFont (custom Iosevka) - must be before tailwindcss */
+@import url('https://cdn.jsdelivr.net/npm/@nxtcoder17/nxtfont@latest/nxtfont.css');
 
-/* JetBrains Mono */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
 
 /* Theme tokens */
 @theme {
@@ -46,7 +46,7 @@
 body {
   background: var(--theme-bg);
   color: var(--theme-fg);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'NxtFont', monospace;
   font-size: 0.9375rem;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;

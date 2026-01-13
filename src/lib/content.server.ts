@@ -12,7 +12,6 @@ export interface TilEntry {
   slug: string;
   category: "tech" | "life";
   content?: string;
-  readingTime?: string;
 }
 
 export interface TilNavigation {
@@ -22,13 +21,6 @@ export interface TilNavigation {
 
 export interface TilWithNavigation extends TilEntry {
   navigation: TilNavigation;
-}
-
-function calculateReadingTime(text: string): string {
-  const wordsPerMinute = 200;
-  const words = text.trim().split(/\s+/).length;
-  const minutes = Math.ceil(words / wordsPerMinute);
-  return minutes === 1 ? "1 min read" : `${minutes} min read`;
 }
 
 const CONTENT_DIR = join(process.cwd(), "content");
@@ -177,7 +169,6 @@ export async function getTil(category: "tech" | "life", slug: string): Promise<T
     slug,
     category,
     content: await renderMarkdown(content),
-    readingTime: calculateReadingTime(content),
     navigation,
   };
 }
