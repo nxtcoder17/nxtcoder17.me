@@ -1,12 +1,6 @@
-import {
-  Show,
-  createSignal,
-  onMount,
-  onCleanup,
-} from "solid-js";
+import { Show } from "solid-js";
 import { createAsync, cache } from "@solidjs/router";
 import SearchBar from "~/components/SearchBar";
-import CommandPalette from "~/components/CommandPalette";
 import Spotlight from "~/components/Spotlight";
 import Timeline from "~/components/Timeline";
 import { getRecentTils } from "~/lib/content.server";
@@ -22,31 +16,6 @@ export const route = {
 
 export default function TilHomepage() {
   const tils = createAsync(() => loadRecentTils());
-  const [isPaletteOpen, setIsPaletteOpen] = createSignal(false);
-
-  // Global keyboard shortcut for Cmd+K
-  onMount(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      // Cmd+K or Ctrl+K to open
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        setIsPaletteOpen(true);
-      }
-      // Also allow / to open (when not in input)
-      if (
-        e.key === "/" &&
-        !["INPUT", "TEXTAREA"].includes(
-          (e.target as HTMLElement)?.tagName || ""
-        )
-      ) {
-        e.preventDefault();
-        setIsPaletteOpen(true);
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyDown);
-    onCleanup(() => document.removeEventListener("keydown", handleKeyDown));
-  });
 
   // Get first entry for spotlight
   const spotlightEntry = () => {
@@ -60,11 +29,7 @@ export default function TilHomepage() {
     const all = tils() || [];
     const tech = all.filter((t) => t.category === "tech").length;
     const life = all.filter((t) => t.category === "life").length;
-
-    // Count unique days
-    const uniqueDays = new Set(all.map((t) => t.date)).size;
-
-    return { total: all.length, tech, life, days: uniqueDays };
+    return { total: all.length, tech, life };
   };
 
   return (
@@ -100,8 +65,8 @@ export default function TilHomepage() {
           </div>
         </div>
 
-        {/* Search bar */}
-        <SearchBar onClick={() => setIsPaletteOpen(true)} />
+        {/* Search bar (includes command palette) */}
+        <SearchBar entries={tils() || []} />
       </header>
 
       {/* Spotlight - Latest entry */}
@@ -128,13 +93,6 @@ export default function TilHomepage() {
           </p>
         </div>
       </Show>
-
-      {/* Command Palette */}
-      <CommandPalette
-        isOpen={isPaletteOpen()}
-        onClose={() => setIsPaletteOpen(false)}
-        entries={tils() || []}
-      />
     </div>
   );
 }

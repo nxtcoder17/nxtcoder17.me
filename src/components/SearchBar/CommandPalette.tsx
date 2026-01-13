@@ -1,4 +1,4 @@
-import { createSignal, createEffect, For, Show, onCleanup } from "solid-js";
+import { createSignal, createEffect, For, Show } from "solid-js";
 import { A, useNavigate } from "@solidjs/router";
 import type { TilEntry } from "~/lib/content.server";
 
