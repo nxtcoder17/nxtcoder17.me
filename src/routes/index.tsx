@@ -24,46 +24,13 @@ export default function TilHomepage() {
     return entries[0];
   };
 
-  // Stats calculation
-  const stats = () => {
-    const all = tils() || [];
-    const tech = all.filter((t) => t.category === "tech").length;
-    const life = all.filter((t) => t.category === "life").length;
-    return { total: all.length, tech, life };
-  };
-
   return (
     <div class="space-y-10">
       {/* Header section with title and search */}
       <header class="space-y-6">
-        {/* Title and stats */}
-        <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-          <div>
-            <h1 class="text-2xl font-bold tracking-tight text-fg">
-              Today I Learned
-            </h1>
-            <p class="text-[14px] text-muted mt-1.5 max-w-sm">
-              Small discoveries and insights from daily learning.
-            </p>
-          </div>
-
-          {/* Compact stats */}
-          <div class="flex items-center gap-4 text-[12px]">
-            <div class="flex items-center gap-1.5">
-              <span class="font-bold text-fg">{stats().total}</span>
-              <span class="text-muted">entries</span>
-            </div>
-            <div class="w-px h-3 bg-border" />
-            <div class="flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-tech" />
-              <span class="font-semibold text-tech">{stats().tech}</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <span class="w-2 h-2 rounded-full bg-life" />
-              <span class="font-semibold text-life">{stats().life}</span>
-            </div>
-          </div>
-        </div>
+        <h1 class="text-2xl font-bold tracking-tight text-fg">
+          Today I Learned
+        </h1>
 
         {/* Search bar (includes command palette) */}
         <SearchBar entries={tils() || []} />
