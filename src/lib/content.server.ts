@@ -11,6 +11,7 @@ export interface TilEntry {
   date: string;
   slug: string;
   category: "tech" | "life";
+  tags: string[];
   content?: string;
 }
 
@@ -130,6 +131,7 @@ export async function getAllTils(category: "tech" | "life"): Promise<TilEntry[]>
       date: data.date ? formatDateString(data.date) : "",
       slug,
       category,
+      tags: Array.isArray(data.tags) ? data.tags : [],
     };
   });
 

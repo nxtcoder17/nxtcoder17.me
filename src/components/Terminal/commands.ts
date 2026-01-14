@@ -105,7 +105,8 @@ Examples:
     const matches = entries.filter(
       (e) =>
         e.title.toLowerCase().includes(term) ||
-        e.slug.toLowerCase().includes(term)
+        e.slug.toLowerCase().includes(term) ||
+        e.tags.some((tag) => tag.toLowerCase().includes(term))
     );
 
     if (matches.length === 0) {
@@ -113,19 +114,33 @@ Examples:
     }
 
     const lines = matches.map((e) => {
-      // Highlight matching text
-      const titleLower = e.title.toLowerCase();
-      const idx = titleLower.indexOf(term);
-      if (idx !== -1) {
+      // Check where match occurred
+      const titleMatch = e.title.toLowerCase().includes(term);
+      const tagMatch = e.tags.find((t) => t.toLowerCase().includes(term));
+
+      let result = `<span class="text-muted">${e.slug}</span>: `;
+
+      // Highlight in title if matched
+      if (titleMatch) {
+        const titleLower = e.title.toLowerCase();
+        const idx = titleLower.indexOf(term);
         const before = e.title.slice(0, idx);
         const match = e.title.slice(idx, idx + term.length);
         const after = e.title.slice(idx + term.length);
-        return `<span class="text-muted">${e.slug}</span>: ${before}<span class="text-tech font-bold">${match}</span>${after}`;
+        result += `${before}<span class="text-tech font-bold">${match}</span>${after}`;
+      } else {
+        result += e.title;
       }
-      return `<span class="text-muted">${e.slug}</span>: ${e.title}`;
+
+      // Show matching tag
+      if (tagMatch) {
+        result += ` <span class="text-xs bg-tech/20 text-tech px-1.5 py-0.5 rounded">${tagMatch}</span>`;
+      }
+
+      return result;
     });
 
-    return { type: "success", html: lines.join("\n") };
+    return { type: "success", html: lines.join("<br/>") };
   },
 
   cd: (args, _entries, _cwd) => {
