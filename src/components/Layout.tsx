@@ -1,12 +1,22 @@
-import { A } from "@solidjs/router";
-import { JSX } from "solid-js";
+import { A, createAsync, cache } from "@solidjs/router";
+import { JSX, createSignal } from "solid-js";
 import ThemeSwitcher from "./ThemeSwitcher";
+import Terminal from "./Terminal";
+import { getRecentTils } from "~/lib/content.server";
 
 interface LayoutProps {
   children: JSX.Element;
 }
 
+const loadEntries = cache(async () => {
+  "use server";
+  return getRecentTils(100);
+}, "terminal-entries");
+
 export default function Layout(props: LayoutProps) {
+  const [isTerminalOpen, setIsTerminalOpen] = createSignal(false);
+  const entries = createAsync(() => loadEntries());
+
   return (
     <div class="min-h-screen flex flex-col">
       {/* Header */}
@@ -20,9 +30,28 @@ export default function Layout(props: LayoutProps) {
             TIL
           </A>
 
-          <ThemeSwitcher />
+          <div class="flex items-center gap-2">
+            {/* Terminal toggle */}
+            <button
+              onClick={() => setIsTerminalOpen(!isTerminalOpen())}
+              class="p-2 text-muted hover:text-fg hover:bg-surface rounded-lg transition-colors"
+              title="Toggle Terminal"
+            >
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </button>
+            <ThemeSwitcher />
+          </div>
         </nav>
       </header>
+
+      {/* Terminal sidebar */}
+      <Terminal
+        isOpen={isTerminalOpen()}
+        onClose={() => setIsTerminalOpen(false)}
+        entries={entries() || []}
+      />
 
       {/* Main content */}
       <main class="flex-1 max-w-2xl mx-auto px-6 py-12 w-full">
