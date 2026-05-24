@@ -175,6 +175,40 @@ export async function getTil(category: "tech" | "life", slug: string): Promise<T
   };
 }
 
+export async function getTilBySlug(slug: string): Promise<TilWithNavigation | null> {
+  // Search in both categories
+  for (const category of ["tech", "life"] as const) {
+    const dir = getContentDir(category);
+    const filePath = join(dir, `${slug}.md`);
+
+    if (existsSync(filePath)) {
+      const fileContent = readFileSync(filePath, "utf-8");
+      const { data, content } = matter(fileContent);
+
+      // Get all TILs across both categories for prev/next navigation
+      const allTils = await getRecentTils(100);
+      const currentIndex = allTils.findIndex((t) => t.slug === slug);
+
+      const navigation: TilNavigation = {
+        next: currentIndex > 0 ? { title: allTils[currentIndex - 1].title, slug: allTils[currentIndex - 1].slug } : null,
+        prev: currentIndex < allTils.length - 1 ? { title: allTils[currentIndex + 1].title, slug: allTils[currentIndex + 1].slug } : null,
+      };
+
+      return {
+        title: data.title || slug,
+        date: data.date ? formatDateString(data.date) : "",
+        slug,
+        category,
+        tags: Array.isArray(data.tags) ? data.tags : [],
+        content: await renderMarkdown(content),
+        navigation,
+      };
+    }
+  }
+
+  return null;
+}
+
 export async function getRecentTils(count: number = 20): Promise<TilEntry[]> {
   const techTils = await getAllTils("tech");
   const lifeTils = await getAllTils("life");

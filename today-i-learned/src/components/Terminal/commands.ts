@@ -73,7 +73,7 @@ Examples:
 
     // Fetch full content from server
     try {
-      const response = await fetch(`/api/til/${entry.category}/${slug}`);
+      const response = await fetch(`/api/til/${slug}`);
       if (!response.ok) {
         return { type: "error", text: `cat: ${slug}: Failed to load content` };
       }

@@ -10,7 +10,7 @@ export default function TimelineEntry(props: TimelineEntryProps) {
 
   return (
     <A
-      href={`/${props.entry.category}/${props.entry.slug}`}
+      href={`/til/${props.entry.slug}`}
       class="group flex items-center gap-3 py-2.5 px-3 -ml-3 rounded-lg hover:bg-surface transition-colors"
     >
       {/* Category dot */}

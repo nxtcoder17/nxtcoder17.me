@@ -1,17 +1,10 @@
 import { APIEvent } from "@solidjs/start/server";
-import { getTil } from "~/lib/content.server";
+import { getTilBySlug } from "~/lib/content.server";
 
 export async function GET({ params }: APIEvent) {
-  const { category, slug } = params;
+  const { slug } = params;
 
-  if (category !== "tech" && category !== "life") {
-    return new Response(JSON.stringify({ error: "Invalid category" }), {
-      status: 400,
-      headers: { "Content-Type": "application/json" },
-    });
-  }
-
-  const til = await getTil(category, slug);
+  const til = await getTilBySlug(slug);
 
   if (!til) {
     return new Response(JSON.stringify({ error: "Not found" }), {

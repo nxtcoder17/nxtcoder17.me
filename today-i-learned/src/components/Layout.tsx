@@ -50,7 +50,7 @@ export default function Layout(props: LayoutProps) {
       >
         {/* Header - only above main content */}
         <header class="flex-shrink-0 z-50 bg-bg/80 backdrop-blur-md border-b border-border">
-          <nav class="max-w-2xl mx-auto px-6 h-14 flex items-center justify-between">
+          <nav class="max-w-3xl mx-auto px-6 h-14 flex items-center justify-between">
             {/* Logo */}
             <A
               href="/"
@@ -81,13 +81,13 @@ export default function Layout(props: LayoutProps) {
 
         {/* Scrollable main content */}
         <main class="flex-1 overflow-y-auto">
-          <div class="max-w-2xl mx-auto px-6 py-12">
+          <div class="max-w-3xl mx-auto px-6 py-12">
             {props.children}
           </div>
 
           {/* Footer inside main scroll area */}
           <footer class="border-t border-border">
-            <div class="max-w-2xl mx-auto px-6 py-8">
+            <div class="max-w-3xl mx-auto px-6 py-8">
               <div class="flex items-center justify-between">
                 <p class="text-[13px] text-muted">
                   Learning something new, every day.

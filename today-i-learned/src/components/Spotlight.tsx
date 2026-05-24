@@ -20,7 +20,7 @@ export default function Spotlight(props: SpotlightProps) {
 
       {/* Spotlight card */}
       <A
-        href={`/${props.entry.category}/${props.entry.slug}`}
+        href={`/til/${props.entry.slug}`}
         class="group block relative"
       >
         {/* Decorative border */}
