@@ -1,7 +1,9 @@
-import { Router } from "@solidjs/router";
-import { FileRoutes } from "@solidjs/start/router";
+import { Router, Route } from "@solidjs/router";
 import { Suspense } from "solid-js";
 import Layout from "~/components/Layout";
+import TilHomepage from "~/routes/index";
+import TilPage from "~/routes/til/[slug]";
+import NotFound from "~/routes/[...404]";
 import "./app.css";
 
 export default function App() {
@@ -13,7 +15,9 @@ export default function App() {
         </Layout>
       )}
     >
-      <FileRoutes />
+      <Route path="/" component={TilHomepage} />
+      <Route path="/til/:slug" component={TilPage} />
+      <Route path="*tag" component={NotFound} />
     </Router>
   );
 }

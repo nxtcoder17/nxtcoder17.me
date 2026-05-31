@@ -3,7 +3,17 @@ export interface TilEntry {
   date: string;
   slug: string;
   category: "tech" | "life";
+  tags?: string[];
   content?: string;
+}
+
+export interface TilNavigation {
+  prev: { title: string; slug: string } | null;
+  next: { title: string; slug: string } | null;
+}
+
+export interface TilWithNavigation extends TilEntry {
+  navigation: TilNavigation;
 }
 
 export function formatDisplayDate(dateStr: string): string {

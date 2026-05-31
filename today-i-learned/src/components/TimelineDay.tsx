@@ -1,6 +1,6 @@
 import { For } from "solid-js";
 import TimelineEntry from "./TimelineEntry";
-import type { TilEntry } from "~/lib/content.server";
+import type { TilEntry } from "~/lib/types";
 
 interface TimelineDayProps {
   date: string;

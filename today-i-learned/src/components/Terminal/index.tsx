@@ -1,6 +1,6 @@
 import { createSignal, createEffect, For, Show, onMount, onCleanup } from "solid-js";
 import { executeCommand, type CommandOutput } from "./commands";
-import type { TilEntry } from "~/lib/content.server";
+import type { TilEntry } from "~/lib/types";
 
 interface TerminalProps {
   onClose: () => void;

@@ -1,6 +1,6 @@
 import { For, createMemo } from "solid-js";
 import TimelineDay from "./TimelineDay";
-import type { TilEntry } from "~/lib/content.server";
+import type { TilEntry } from "~/lib/types";
 
 interface TimelineProps {
   entries: TilEntry[];

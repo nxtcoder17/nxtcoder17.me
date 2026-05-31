@@ -1,6 +1,6 @@
 import { createSignal, onMount, onCleanup } from "solid-js";
 import CommandPalette from "./CommandPalette";
-import type { TilEntry } from "~/lib/content.server";
+import type { TilEntry } from "~/lib/types";
 
 interface SearchBarProps {
   entries: TilEntry[];

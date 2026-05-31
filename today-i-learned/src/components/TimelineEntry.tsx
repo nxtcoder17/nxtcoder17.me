@@ -1,5 +1,5 @@
 import { A } from "@solidjs/router";
-import type { TilEntry } from "~/lib/content.server";
+import type { TilEntry } from "~/lib/types";
 
 interface TimelineEntryProps {
   entry: TilEntry;

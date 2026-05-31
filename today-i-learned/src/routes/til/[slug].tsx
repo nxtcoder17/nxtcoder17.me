@@ -1,20 +1,11 @@
 import { Show } from "solid-js";
-import { A, createAsync, cache, useParams } from "@solidjs/router";
+import { A, useParams } from "@solidjs/router";
 import { formatDisplayDate } from "~/lib/types";
-import { getTilBySlug } from "~/lib/content.server";
-
-const loadTil = cache(async (slug: string) => {
-  "use server";
-  return getTilBySlug(slug);
-}, "til-by-slug");
-
-export const route = {
-  load: ({ params }: { params: { slug: string } }) => loadTil(params.slug),
-};
+import tils from "~/tils.json";
 
 export default function TilPage() {
   const params = useParams();
-  const til = createAsync(() => loadTil(params.slug));
+  const til = () => tils.find((t) => t.slug === params.slug);
 
   return (
     <Show when={til()} fallback={<NotFound />}>

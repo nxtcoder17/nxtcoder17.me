@@ -1,6 +1,6 @@
 import { createSignal, createEffect, For, Show } from "solid-js";
 import { A, useNavigate } from "@solidjs/router";
-import type { TilEntry } from "~/lib/content.server";
+import type { TilEntry } from "~/lib/types";
 
 interface CommandPaletteProps {
   isOpen: boolean;

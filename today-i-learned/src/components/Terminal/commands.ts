@@ -1,4 +1,4 @@
-import type { TilEntry } from "~/lib/content.server";
+import type { TilEntry } from "~/lib/types";
 
 export interface CommandOutput {
   type: "success" | "error";

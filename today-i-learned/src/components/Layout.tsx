@@ -1,23 +1,18 @@
-import { A, createAsync, cache } from "@solidjs/router";
+import { A } from "@solidjs/router";
 import { JSX, createSignal, Show, onMount, onCleanup } from "solid-js";
 import ThemeSwitcher from "./ThemeSwitcher";
 import Terminal from "./Terminal";
-import { getRecentTils } from "~/lib/content.server";
+import tils from "~/tils.json";
 
 interface LayoutProps {
   children: JSX.Element;
 }
 
-const loadEntries = cache(async () => {
-  "use server";
-  return getRecentTils(100);
-}, "terminal-entries");
-
 export default function Layout(props: LayoutProps) {
   const [isTerminalOpen, setIsTerminalOpen] = createSignal(false);
   const [terminalWidth, setTerminalWidth] = createSignal(40); // percentage
   const [isDragging, setIsDragging] = createSignal(false);
-  const entries = createAsync(() => loadEntries());
+  const entries = () => tils;
 
   // Resize handling
   onMount(() => {
